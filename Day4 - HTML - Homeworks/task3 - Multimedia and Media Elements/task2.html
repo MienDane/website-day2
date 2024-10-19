@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura</title>
+    <style>
+        .controls {
+            margin-top: 10px;
+        }
+        button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome</h1>
+
+<!-- Video Section -->
+<section>
+    <h2>Running Query</h2>
+    <video id="myVideo" width="560" height="315" controls>
+        <source src="IMG_0849.mp4" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
+
+    <div class="controls">
+        <button onclick="playVideo()">Play</button>
+        <button onclick="pauseVideo()">Pause</button>
+        <label for="volumeControl">Volume: </label>
+        <input type="range" id="volumeControl" min="0" max="1" step="0.1" onchange="setVolume(this.value)">
+    </div>
+</section>
+
+<!-- Audio Section -->
+<section>
+    <h2>Listening test</h2>
+    <audio id="myAudio">
+        <source src="Mock Exam ELP G7.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="controls">
+        <button onclick="playAudio()">Play</button>
+        <button onclick="pauseAudio()">Pause</button>
+        <label for="audioVolumeControl">Volume: </label>
+        <input type="range" id="audioVolumeControl" min="0" max="1" step="0.1" onchange="setAudioVolume(this.value)">
+    </div>
+</section>
+
+<script>
+    // Video Controls
+    var video = document.getElementById("myVideo");
+
+    function playVideo() {
+        video.play();
+    }
+
+    function pauseVideo() {
+        video.pause();
+    }
+
+    function setVolume(volume) {
+        video.volume = volume;
+    }
+
+    // Audio Controls
+    var audio = document.getElementById("myAudio");
+
+    function playAudio() {
+        audio.play();
+    }
+
+    function pauseAudio() {
+        audio.pause();
+    }
+
+    function setAudioVolume(volume) {
+        audio.volume = volume;
+    }
+</script>
+</body>
+</html>

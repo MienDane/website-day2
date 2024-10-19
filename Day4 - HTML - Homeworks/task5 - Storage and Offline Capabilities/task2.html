@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Find My Location</title>
+    <style>
+        body {
+            text-align: center; /* Center the content */
+            font-family: Arial, sans-serif; /* Use a simple font */
+        }
+        #location {
+            margin-top: 20px; /* Space above location info */
+        }
+    </style>
+</head>
+<body>
+<h1>Find My Location</h1>
+<button id="getLocationBtn">Get Location</button>
+<div id="location"></div> <!-- Display location here -->
+
+<script>
+    // Function to get the user's location
+    function getLocation() {
+        if (navigator.geolocation) { // Check if Geolocation is supported
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            document.getElementById("location").innerText = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    // Function to show the position
+    function showPosition(position) {
+        // Get latitude and longitude
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        document.getElementById("location").innerText = "Latitude: " + latitude + ", Longitude: " + longitude;
+    }
+
+    // Function to show error messages
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                document.getElementById("location").innerText = "Permission denied.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                document.getElementById("location").innerText = "Position unavailable.";
+                break;
+            case error.TIMEOUT:
+                document.getElementById("location").innerText = "Request timed out.";
+                break;
+            default:
+                document.getElementById("location").innerText = "An unknown error occurred.";
+                break;
+        }
+    }
+
+    // Add click event to the button
+    document.getElementById("getLocationBtn").onclick = getLocation; // Call getLocation when clicked
+</script>
+</body>
+</html>

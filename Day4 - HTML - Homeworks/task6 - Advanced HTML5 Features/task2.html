@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Example</title>
+</head>
+<body>
+<h1>Welcome to My Offline Page</h1>
+<p>This webpage works offline thanks to a service worker!</p>
+
+<!-- JavaScript to register the service worker -->
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(function() {
+                console.log('Service Worker Registered');
+            });
+    }
+</script>
+</body>
+</html>

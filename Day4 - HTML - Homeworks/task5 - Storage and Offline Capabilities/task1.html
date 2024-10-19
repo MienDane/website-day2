@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bouncing Ball Game</title>
+    <style>
+        canvas {
+            border: 2px solid #333; /* Border for the canvas */
+            display: block; /* Center canvas */
+            margin: auto; /* Center the canvas */
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">Bouncing Ball Game</h1>
+<canvas id="myCanvas" width="600" height="400"></canvas>
+
+<script>
+    // Get the canvas and context
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Ball properties
+    var x = canvas.width / 2; // Ball's starting x position
+    var y = canvas.height / 2; // Ball's starting y position
+    var radius = 20; // Ball radius
+    var dx = 2; // Change in x (speed)
+    var dy = -2; // Change in y (speed)
+
+    // Function to draw the ball
+    function drawBall() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        ctx.beginPath(); // Start a new drawing path
+        ctx.arc(x, y, radius, 0, Math.PI * 2); // Draw the ball
+        ctx.fillStyle = "blue"; // Fill color
+        ctx.fill(); // Fill the ball
+        ctx.closePath(); // Finish the drawing path
+    }
+
+    // Function to update ball position
+    function update() {
+        drawBall(); // Draw the ball
+
+        // Check for wall collisions
+        if (x + dx > canvas.width - radius || x + dx < radius) {
+            dx = -dx; // Reverse direction on x-axis
+        }
+        if (y + dy > canvas.height - radius || y + dy < radius) {
+            dy = -dy; // Reverse direction on y-axis
+        }
+
+        // Update ball position
+        x += dx;
+        y += dy;
+
+        requestAnimationFrame(update); // Keep updating
+    }
+
+    update(); // Start the animation
+</script>
+</body>
+</html>

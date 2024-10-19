@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Color</title>
+</head>
+<body>
+<h1>Select a Background Color</h1>
+<label for="colorSelect"></label>
+<select id="colorSelect">
+    <option value="">--Select a Color--</option>
+    <option value="white">White</option>
+    <option value="lightblue">Light Blue</option>
+    <option value="lightgreen">Light Green</option>
+    <option value="lightyellow">Light Yellow</option>
+</select>
+
+<script>
+    // Function to set background color and save it
+    function setColor() {
+        const selectedColor = document.getElementById("colorSelect").value; // Get the chosen color
+        document.body.style.backgroundColor = selectedColor; // Change background color
+        localStorage.setItem("bgColor", selectedColor); // Save the color in local storage
+    }
+
+    // Function to load saved color on page load
+    function loadSavedColor() {
+        const savedColor = localStorage.getItem("bgColor"); // Get the saved color from local storage
+        if (savedColor) { // If a color is saved
+            document.body.style.backgroundColor = savedColor; // Apply saved color
+            document.getElementById("colorSelect").value = savedColor; // Set dropdown to saved color
+        }
+    }
+
+    // Run the load function when the page loads
+    window.onload = loadSavedColor;
+
+    // Add event listener for dropdown change
+    document.getElementById("colorSelect").onchange = setColor;
+</script>
+</body>
+</html>

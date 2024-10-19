@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Interactive Drawing App</title>
+    <style>
+        canvas {
+            border: 2px solid #000; /* Border for the canvas */
+            cursor: crosshair; /* Change cursor to cross hair */
+        }
+    </style>
+</head>
+<body>
+<h1>Interactive Drawing App</h1>
+<canvas id="myCanvas" width="500" height="500"></canvas>
+
+<script>
+    // Get the canvas element and its context
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Variables to store mouse position and drawing state
+    let drawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    // Start drawing when the mouse is pressed
+    canvas.addEventListener("mousedown", function(e) {
+        drawing = true; // Set drawing state to true
+        lastX = e.offsetX; // Store the current mouse position
+        lastY = e.offsetY;
+    });
+
+    // Stop drawing when the mouse is released
+    canvas.addEventListener("mouseup", function() {
+        drawing = false; // Set drawing state to false
+    });
+
+    // Draw on the canvas when the mouse is moving
+    canvas.addEventListener("mousemove", function(e) {
+        if (drawing) { // Only draw if the mouse is pressed
+            ctx.beginPath(); // Start a new path
+            ctx.moveTo(lastX, lastY); // Move to the last mouse position
+            ctx.lineTo(e.offsetX, e.offsetY); // Draw line to the current mouse position
+            ctx.strokeStyle = "black"; // Set stroke color
+            ctx.lineWidth = 5; // Set line width
+            ctx.stroke(); // Render the line
+
+            // Update last mouse position
+            lastX = e.offsetX;
+            lastY = e.offsetY;
+        }
+    });
+
+    // Optional: Clear the canvas with a double click
+    canvas.addEventListener("dblclick", function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    });
+</script>
+</body>
+</html>
